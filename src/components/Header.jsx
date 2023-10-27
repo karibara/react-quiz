@@ -1,9 +1,9 @@
-import logoImg from '../assets/quiz-logo.png';
+import logoImg from '../assets/poirot-logo.png';
 
 export default function Header() {
     return (
         <header>
-        <img scr={logoImg} alt="Agatha Christie Quiz logo"/>
+        <img src={logoImg} alt="Agatha Christie Quiz logo"/>
         <h1>'Queen of Crime' QUIZ</h1>
     </header>
         ) 
