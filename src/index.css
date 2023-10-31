@@ -217,10 +217,12 @@ header h1 {
   max-width: 40rem;
   margin: 2rem auto;
   padding: 2rem;
-  background: linear-gradient(180deg, #a17eda 0%, #895fc4 100%);
-  color: #191321;
+  /* background: linear-gradient(180deg, #91BECF 0%, #2C6171 100%); */
+  background: linear-gradient(135deg, rgba(145,190,207,0.2) 0%, rgba(184, 222, 232, 0.1) 65%,
+  rgba(137, 193, 217, 0.1) 80%, rgba(44, 97, 113, 0.13) 100%);
+  color: #010101;
   border-radius: 8px;
-  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.6);
+  box-shadow: 1px 1px 20px 1px rgba(0, 0, 0, 0.2);
   animation: slide-in-from-bottom 0.7s ease-out;
 }
 
@@ -232,18 +234,18 @@ header h1 {
   margin: 0 auto 1rem auto;
   padding: 1rem;
   filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.6));
-  border: 2px solid #3a2353;
+  border: 2px solid #010101;
   border-radius: 50%;
-  background: #c18cfa;
+  background: rgba(145, 190, 207, 0.3);
 }
 
 #summary h2 {
   font-family: 'Poiret One', sans-serif;
-  font-size: 3rem;
+  font-size: 3.2rem;
   text-align: center;
   margin: 0;
   text-transform: uppercase;
-  color: #3a2353;
+  color: #010101;
 }
 
 #summary ol {

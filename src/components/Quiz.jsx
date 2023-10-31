@@ -1,16 +1,12 @@
 import { useState } from "react"
 import QUESTIONS from "../questions"
+import tropheyImg from "../assets/trophey.png"
 
 export default function Quiz() {
     // Register answers in an array. The number of stored answers in this array is currently question index (because index starts at 0)
     const [userAnswers, setUserAnswers] = useState([])
 
     const activeQuestionIndex = userAnswers.length
-
-    // spread answers into new array and shuffle them
-    const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers]
-    shuffledAnswers.sort(() => Math.random() - 0.5)
-    // sort() edit array (not create new), so this is why I create new array, to save an original order (because in original order the firts answer is always correct)
 
     // quiz is complete (true) when number of questions is equal to activeQuestionIndex
     const quizIsComplete = activeQuestionIndex === QUESTIONS.length
@@ -20,6 +16,19 @@ export default function Quiz() {
             return [...prevUserAnswers, selectedAnswer];
         });
     }
+
+    if(quizIsComplete) {
+        return <div id="summary">
+            <img src={tropheyImg} alt="trophy" />
+            <h2>Quiz Completed!</h2>
+        </div>
+    }
+
+      // spread answers into new array and shuffle them
+      const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers]
+      shuffledAnswers.sort(() => Math.random() - 0.5)
+      // sort() edit array (not create new), so this is why I create new array, to save an original order (because in original order the firts answer is always correct)
+    //   this code here only executes if we still have questions to display
 
     return (
         <div id="quiz">
