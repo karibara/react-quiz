@@ -7,6 +7,14 @@ export default function Quiz() {
 
     const activeQuestionIndex = userAnswers.length
 
+    // spread answers into new array and shuffle them
+    const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers]
+    shuffledAnswers.sort(() => Math.random() - 0.5)
+    // sort() edit array (not create new), so this is why I create new array, to save an original order (because in original order the firts answer is always correct)
+
+    // quiz is complete (true) when number of questions is equal to activeQuestionIndex
+    const quizIsComplete = activeQuestionIndex === QUESTIONS.length
+
     function handleSelectAnswer(selectedAnswer) {
         setUserAnswers((prevUserAnswers) => {
             return [...prevUserAnswers, selectedAnswer];
@@ -19,7 +27,7 @@ export default function Quiz() {
         <div id="question">
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul id="answers">
-        {QUESTIONS[activeQuestionIndex].answers.map((answer) => (
+        {shuffledAnswers.map((answer) => (
             <li key={answer} className="answer">
                 <button onClick={() => {handleSelectAnswer()}}>{answer}</button>
             </li>

@@ -23,7 +23,7 @@ export default [
     id: "q4",
     text: "Which Guinness world record does Christie hold?",
     answers: [
-      "World<q>s bestselling novelist",
+      "World’s bestselling novelist",
       "Oldest novelist to have had a book published",
       "Most murders in her novels",
       "Novelist most frequently adapted for TV",
@@ -91,7 +91,7 @@ export default [
       "A murder occurs in a hotel where the guests are trapped by snow",
       "The passengers on a train conspire to kill a fellow passenger",
       "A serial killer is on the loose in a small Devon village",
-      "After a murder at a butler<q>s convention, everyone is a suspect",
+      "After a murder at a butler’s convention, everyone is a suspect",
     ],
   },
 ];
