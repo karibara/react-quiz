@@ -10,13 +10,22 @@ export default function QuestionTimer({timeout, onTimeout}) {
     useEffect(() => {
 
         // the fnc onTimeout will be called by the browser once this timeout expired
-        setTimeout(onTimeout, timeout)
+        const timer = setTimeout(onTimeout, timeout)
+        // add cleanup function to stop timer
+        return () => {
+            clearTimeout(timer)
+        }
     }, [onTimeout, timeout])
 
     useEffect(() => {
 
         // update state based on previous stored value - it is prev remaining time - 100 (mibus my frequency)
-        setInterval(() => {setRemainingTime(prevRemainingTime => prevRemainingTime - 100)}, 100)
+        const interval = setInterval(() => {setRemainingTime(prevRemainingTime => prevRemainingTime - 100)
+        }, 100);
+        // add cleanup function to stop interval
+        return () => {
+            clearInterval(interval)
+        }
     }, [])
 
     return <progress id="question-time" value={remainingTime} max={timeout}></progress>
