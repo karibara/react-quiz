@@ -4,10 +4,14 @@ import QuestionTimer from "./QuestionTimer";
 import tropheyImg from "../assets/trophey.png";
 
 export default function Quiz() {
+  const [answerState, setAnswerState] = useState("");
+
   // Register answers in an array. The number of stored answers in this array is currently question index (because index starts at 0)
   const [userAnswers, setUserAnswers] = useState([]);
 
-  const activeQuestionIndex = userAnswers.length;
+  // make sure that activeQuestionIndex is equal to users answers length if the question isn't answered yet. Otherwise it should be -1, so that we stick to the first question order
+  const activeQuestionIndex =
+    answerState === "" ? userAnswers.length : userAnswers.length - 1;
 
   // quiz is complete (true) when number of questions is equal to activeQuestionIndex
   const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
@@ -15,18 +19,35 @@ export default function Quiz() {
   // useCallback to memoize a function (part 2)
   const handleSelectAnswer = useCallback(
     function handleSelectAnswer(selectedAnswer) {
+      setAnswerState("answered");
+
       setUserAnswers((prevUserAnswers) => {
         return [...prevUserAnswers, selectedAnswer];
       });
-    }, 
-    // no dependencies because in this function we are not using any state or props, and also not any other values depend on state or props
-    []
-    )
+
+      setTimeout(() => {
+        // check if the anwer is correct - compare to first answer in  object array
+        if (selectedAnswer === QUESTIONS[activeQuestionIndex].answers[0]) {
+          setAnswerState("correct");
+        } else {
+          setAnswerState("wrong");
+        }
+        // reset the answerState
+        setTimeout(() => {
+          setAnswerState("");
+        }, 2000);
+      }, 1000);
+    },
+    // dependencies - when activeQuestionIndex value change function will be recreated
+    [activeQuestionIndex]
+  );
 
   // useCallback to memoize a function (part 1)
-  const handleSkipAnswer = useCallback(() => handleSelectAnswer(null),
-  // function is dependency because this function is a value created in component function which could depend on props and state
-  [handleSelectAnswer])
+  const handleSkipAnswer = useCallback(
+    () => handleSelectAnswer(null),
+    // function is dependency because this function is a value created in component function which could depend on props and state
+    [handleSelectAnswer]
+  );
 
   if (quizIsComplete) {
     return (
@@ -54,17 +75,34 @@ export default function Quiz() {
         />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul id="answers">
-          {shuffledAnswers.map((answer) => (
-            <li key={answer} className="answer">
-              <button
-                onClick={() => {
-                  handleSelectAnswer();
-                }}
-              >
-                {answer}
-              </button>
-            </li>
-          ))}
+          {shuffledAnswers.map((answer) => {
+            let cssClass = "";
+            const isSelected = userAnswers[userAnswers.length - 1] === answer;
+
+            if ((answerState === "answered") & isSelected) {
+              cssClass = "selected";
+            }
+
+            if (
+              (answerState === "correct" || answerState === "wrong") &&
+              isSelected
+            ) {
+              cssClass = answerState;
+            }
+
+            return (
+              <li key={answer} className="answer">
+                <button
+                  onClick={() => {
+                    handleSelectAnswer();
+                  }}
+                  className={cssClass}
+                >
+                  {answer}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
