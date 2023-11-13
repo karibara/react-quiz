@@ -20,6 +20,7 @@ export default function Quiz() {
   const handleSelectAnswer = useCallback(
     function handleSelectAnswer(selectedAnswer) {
       setAnswerState("answered");
+      console.log("answered");
 
       setUserAnswers((prevUserAnswers) => {
         return [...prevUserAnswers, selectedAnswer];
@@ -27,10 +28,13 @@ export default function Quiz() {
 
       setTimeout(() => {
         // check if the anwer is correct - compare to first answer in  object array
+        console.log(selectedAnswer);
         if (selectedAnswer === QUESTIONS[activeQuestionIndex].answers[0]) {
           setAnswerState("correct");
+          console.log("answer correct");
         } else {
           setAnswerState("wrong");
+          console.log("answer wrong");
         }
         // reset the answerState
         setTimeout(() => {
@@ -76,10 +80,10 @@ export default function Quiz() {
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul id="answers">
           {shuffledAnswers.map((answer) => {
-            let cssClass = "";
             const isSelected = userAnswers[userAnswers.length - 1] === answer;
+            let cssClass = "";
 
-            if ((answerState === "answered") & isSelected) {
+            if (answerState === "answered" && isSelected) {
               cssClass = "selected";
             }
 
