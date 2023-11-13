@@ -19,6 +19,7 @@ export default function Quiz() {
   // useCallback to memoize a function (part 2)
   const handleSelectAnswer = useCallback(
     function handleSelectAnswer(selectedAnswer) {
+      console.log(selectedAnswer);
       setAnswerState("answered");
       console.log("answered");
 
@@ -28,7 +29,7 @@ export default function Quiz() {
 
       setTimeout(() => {
         // check if the anwer is correct - compare to first answer in  object array
-        console.log(selectedAnswer);
+
         if (selectedAnswer === QUESTIONS[activeQuestionIndex].answers[0]) {
           setAnswerState("correct");
           console.log("answer correct");
@@ -98,7 +99,7 @@ export default function Quiz() {
               <li key={answer} className="answer">
                 <button
                   onClick={() => {
-                    handleSelectAnswer();
+                    handleSelectAnswer(answer);
                   }}
                   className={cssClass}
                 >
