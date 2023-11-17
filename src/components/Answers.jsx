@@ -42,6 +42,7 @@ export default function Anwers({
                 onSelect(answer);
               }}
               className={cssClass}
+              disabled={answerState !== ""}
             >
               {answer}
             </button>
