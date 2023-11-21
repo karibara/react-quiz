@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 
 
@@ -121,15 +121,18 @@ header h1 {
 }
 
 #question progress.answered {
-  background: #f8e59c;
+  background: #8d4321;
 }
 
 #question progress.answered::-webkit-progress-value {
-  background: #f8e59c;
+  /* background:  #e3865a; */
+  background: #88afbd;
 }
 
 #question progress.answered::-webkit-progress-bar {
-  background: #7F4A3A;
+  /* background:  #8d4321; */
+ 
+  background: #2C6171;
 }
 
 #question h2 {

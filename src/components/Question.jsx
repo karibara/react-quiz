@@ -10,6 +10,17 @@ export default function Question({ onSelectAnswer, onSkipAnswer, index }) {
     isCorrect: null,
   });
 
+  let timer = 10000;
+
+  // if the answer has been selected
+  if (answer.selectedAnswer) {
+    timer = 1000;
+  }
+  // we have answer no matter if it is correct or wrong
+  if (answer.isCorrect !== null) {
+    timer = 2000;
+  }
+
   function handleSelectAnswer(answer) {
     setAnswer({
       selectedAnswer: answer,
@@ -33,17 +44,21 @@ export default function Question({ onSelectAnswer, onSkipAnswer, index }) {
   //  if isCorrect is null that means that we might have a selectedAnswer but we don't want show result yet
   if (answer.selectedAnswer && answer.isCorrect !== null) {
     answerState = answer.isCorrect ? "correct" : "wrong";
-    console.log(answerState);
   } else if (answer.selectedAnswer) {
     // checking to mark an answer as selected (in aswers)
     answerState = "answered";
-    console.log(answerState);
   }
 
   return (
     <div id="question">
       {/* add key prop to reset a QuestionTimer every time when a question changes */}
-      <QuestionTimer timeout={10000} onTimeout={onSkipAnswer} />
+      {/* onSkipAnswered is now run conditionaly */}
+      <QuestionTimer
+        key={timer}
+        timeout={timer}
+        onTimeout={answer.selectedAnswer === "" ? onSkipAnswer : null}
+        mode={answerState}
+      />
       <h2>{QUESTIONS[index].text}</h2>
       <Anwers
         answers={QUESTIONS[index].answers}
