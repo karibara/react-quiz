@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import QUESTIONS from "../questions";
 import Question from "./Question";
-import tropheyImg from "../assets/trophey.png";
+import Summary from "./Summary";
 
 export default function Quiz() {
   // Register answers in an array. The number of stored answers in this array is currently question index (because index starts at 0)
@@ -30,12 +30,7 @@ export default function Quiz() {
   );
 
   if (quizIsComplete) {
-    return (
-      <div id="summary">
-        <img src={tropheyImg} alt="trophy" />
-        <h2>Quiz Completed!</h2>
-      </div>
-    );
+    return <Summary />;
   }
 
   return (

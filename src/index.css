@@ -126,7 +126,7 @@ header h1 {
 
 #question progress.answered::-webkit-progress-value {
   /* background:  #e3865a; */
-  background: #88afbd;
+  background: #85aab8;
 }
 
 #question progress.answered::-webkit-progress-bar {
