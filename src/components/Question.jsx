@@ -19,7 +19,7 @@ export default function Question({ onSelectAnswer, onSkipAnswer, index }) {
     setTimeout(() => {
       setAnswer({
         selectedAnswer: answer,
-        isCorrect: QUESTIONS[index].answer[0] === answer,
+        isCorrect: QUESTIONS[index].answers[0] === answer,
       });
 
       setTimeout(() => {
@@ -33,9 +33,11 @@ export default function Question({ onSelectAnswer, onSkipAnswer, index }) {
   //  if isCorrect is null that means that we might have a selectedAnswer but we don't want show result yet
   if (answer.selectedAnswer && answer.isCorrect !== null) {
     answerState = answer.isCorrect ? "correct" : "wrong";
+    console.log(answerState);
   } else if (answer.selectedAnswer) {
     // checking to mark an answer as selected (in aswers)
     answerState = "answered";
+    console.log(answerState);
   }
 
   return (
